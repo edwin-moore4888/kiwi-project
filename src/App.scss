@@ -19,21 +19,44 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    select {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: black;
+        margin-top: 10px;
+        text-align: center;
+    }
   }
 
   .search-bar {
 
       button {
-          font-family: Georgia, 'Times New Roman', Times, serif;
-          font-size: 2vmax;
-          color: white;
-          background-image: linear-gradient(90deg, #E3535D, #62a4cf);
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 1vmax;
+        color: white;
+        background-image: linear-gradient(90deg, #E3535D, #62a4cf);
 
       }
 
       input {
-        font-size: 2vmax;
         font-family: Georgia, 'Times New Roman', Times, serif;
       }
+
   }
+
+  .select-bar {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+
+  }
+
+  .result {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      text-align: center;
+    //   display: flex;
+    //   width: 300px;
+    //   border: 15px solid rgb(204, 165, 199);
+    //   padding: 50px;
+    //   margin: 20px;
+  }
+
 
