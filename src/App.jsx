@@ -5,6 +5,16 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
+
+  const loadData = async () => {
+    const response = await fetch(
+      "https://api.skypicker.com/flights?fly_from=PRG&fly_to=VLC&partner=data4youcbp202106"
+    );
+    const data = await response.json();
+    console.log(data);
+  };
+  loadData();
+
   return (
     <div className="App">
       <Search
