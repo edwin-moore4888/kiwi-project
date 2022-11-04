@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
   loadData();
   return (
     <div className="App">
-      <h1>Helllo</h1>
+      <h1 className='App__header'>Let the journey begin</h1>
     </div>
   );
 }
