@@ -101,19 +101,21 @@ function App() {
         {isLoading ? <p>Searching Flights</p> : flights.length === 0 ? <p>No connections found</p> :
           flights.map(flight => {
             return (
-
-            <div key={flight.id}>
-              <span>Depart From: {flight.cityFrom}</span><br />
-              <span>Arrive To: {flight.cityTo}</span><br />
-              <span>Departure Time: {DateTime.fromMillis(flight.dTime * 1000).toFormat('hh:mm')}</span><br />
-              <span>Arrival Time: {DateTime.fromMillis(flight.aTime * 1000).toFormat('hh:mm')}</span><br />
-              <span>Duration: {flight.fly_duration}</span><br />
-              <span>Airline: {flight.airlines}</span><br />
-              <span>Seats Remaing: {flight.availability.seats}</span><br />
-              <span>Price in Eur: {flight.price}</span><br /><br /> <hr />
-            
-            
-            </div>
+<div className='result'>
+  
+              <div key={flight.id}>
+                <span>Depart From: <span style={{fontWeight: 'bold'}}>{flight.cityFrom}</span></span><br />
+                <span>Arrive To: <span style={{fontWeight: 'bold'}}>{flight.cityTo}</span></span><br />
+                <span>Departure Time: <span style={{fontWeight: 'bold'}}>{DateTime.fromMillis(flight.dTime * 1000).toFormat('hh:mm')}</span></span><br />
+                <span>Arrival Time: <span style={{fontWeight: 'bold'}}>{DateTime.fromMillis(flight.aTime * 1000).toFormat('hh:mm')}</span></span><br />
+                <span>Duration: <span style={{fontWeight: 'bold'}}>{flight.fly_duration}</span></span><br />
+                <span>Airline: <span style={{fontWeight: 'bold'}}>{flight.airlines}</span></span><br />
+                <span>Seats Remaing: <span style={{fontWeight: 'bold'}}>{flight.availability.seats}</span></span><br />
+                <span>Price in Eur: <span style={{fontWeight: 'bold'}}>{flight.price}</span></span><br /><br /> <hr />
+              
+              
+              </div>
+</div>
 
           )})
   
