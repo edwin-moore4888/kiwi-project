@@ -14,9 +14,26 @@
     h1 {
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: 2.5vmax;
-        background-color: #2AA5A0;
-        background-image: linear-gradient(90deg, #E3535D, #2AA5A0);
+        background-color: #2a43d1;
+        background-image: linear-gradient(90deg, #E3535D, #2a43d1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
   }
+
+  .search-bar {
+
+      button {
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          font-size: 2vmax;
+          color: white;
+          background-image: linear-gradient(90deg, #E3535D, #62a4cf);
+
+      }
+
+      input {
+        font-size: 2vmax;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+      }
+  }
+
