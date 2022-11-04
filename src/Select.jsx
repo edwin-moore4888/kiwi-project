@@ -9,7 +9,7 @@ export default function Select({
 
     return (
 
-        <>
+        <div className='select-bar'>
 
 
 
@@ -31,7 +31,7 @@ export default function Select({
                 }
             </select>
 
-        </>
+        </div>
 
     )
 }

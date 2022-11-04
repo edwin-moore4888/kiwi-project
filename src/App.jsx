@@ -1,6 +1,6 @@
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import { useEffect, useState } from 'react';
 import Select from './Select';
 import Search from "./Search";
@@ -63,17 +63,7 @@ const nextResults = () => {
 
 
   return (
-<<<<<<< HEAD
-    <div className="App">
-      <h1 className='App__header'>Let the journey begin</h1>
 
-      <Search
-        setSearchResults={setSearchResults}
-        searchResults={searchResults}
-      />
-    </div>
-  );
-=======
 
       <div className="App">
         <h1 className='App__header'>Let the journey begin</h1>
@@ -103,15 +93,17 @@ const nextResults = () => {
         {
           flights.map(flight => {
             return (
-            <div key={flight.id}>
-              <span>Depart From: {flight.cityFrom}</span><br />
-              <span>Arrive To: {flight.cityTo}</span><br />
-              <span>Departure Time: {flight.dTime}</span><br />
-              <span>Arrival Time: {flight.aTime}</span><br />
-              <span>Price in Eur: {flight.price}</span><br /><br /> <hr />
-            
-            
-            </div>
+           <div className='result'>
+              <div key={flight.id}>
+                <span><span style={{fontWeight: "bold"}}>Depart From:</span> {flight.cityFrom}</span><br />
+                <span><span  style={{fontWeight: "bold"}}>Arrive To:</span> {flight.cityTo}</span><br />
+                <span><span  style={{fontWeight: "bold"}}>Departure Time:</span> {flight.dTime}</span><br />
+                <span><span  style={{fontWeight: "bold"}}>Arrival Time:</span> {flight.aTime}</span><br />
+                <span><span  style={{fontWeight: "bold"}}>Price in Eur:</span> {flight.price}</span><br /><br /> <hr />
+              
+              
+              </div>
+           </div>
           )})
   
             }
@@ -123,7 +115,7 @@ const nextResults = () => {
         </div>
 )
 
->>>>>>> main
+
 }
 
 
