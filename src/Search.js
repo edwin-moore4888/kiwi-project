@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function Search({ setSearchResults, searchResults }) {
+export default function Search({
+  setSearchResults,
+  searchResults,
+  setFlights,
+}) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [flights, setFlights] = useState([]);
+  // const [flights, setFlights] = useState([]);
   const [offset, setOffset] = useState(10);
 
   const searchFlights = async () => {
@@ -13,7 +17,7 @@ export default function Search({ setSearchResults, searchResults }) {
     );
     const data = await response.json();
 
-    setSearchResults(data.locations);
+    // setSearchResults(data.locations);
     // console.log(data.locations);
 
     if (data.locations) {
@@ -40,7 +44,9 @@ export default function Search({ setSearchResults, searchResults }) {
   };
 
   useEffect(() => {
-    searchFlights();
+    if (searchQuery) {
+      searchFlights();
+    }
   }, [offset]);
 
   return (
@@ -57,22 +63,24 @@ export default function Search({ setSearchResults, searchResults }) {
         />
         <button onClick={searchFlights}>Search</button>
       </div>
-      <div className="search-result">
+      {/* <div className="search-result">
         {flights
           ? flights.map((flight) => {
               return (
-                <ul>
-                  <li>Depart From: {flight.cityFrom}</li>
-                  <li>Arrive To: {flight.cityTo}</li>
-                  <li>Departure Time: {flight.dTime}</li>
-                  <li>Arrival Time: {flight.aTime}</li>
-                  <li>Price in Eur: {flight.price}</li>
-                </ul>
+                <>
+                  <ul>
+                    <li>Depart From: {flight.cityFrom}</li>
+                    <li>Arrive To: {flight.cityTo}</li>
+                    <li>Departure Time: {flight.dTime}</li>
+                    <li>Arrival Time: {flight.aTime}</li>
+                    <li>Price in Eur: {flight.price}</li>
+                  </ul>
+                </>
               );
             })
           : ""}
-        <button onClick={changeOffset}>Load More</button>
-      </div>
+        {flights ? <button onClick={changeOffset}>Load More</button> : ""}
+      </div> */}
     </>
   );
 }

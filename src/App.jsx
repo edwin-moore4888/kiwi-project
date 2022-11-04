@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 import { useEffect, useState } from "react";
 import Select from "./Select";
 import Search from "./Search";
@@ -67,10 +67,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="App__header">Let the journey begin</h1>
-      <Search
-        setSearchResults={setSearchResults}
-        searchResults={searchResults}
-      />
+      <Search setFlights={setFlights} searchResults={searchResults} />
       <Select
         label="Departure City"
         name="flight_id"
