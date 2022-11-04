@@ -1,4 +1,3 @@
-
 import logo from "./logo.svg";
 import "./App.scss";
 import { useEffect, useState } from "react";
@@ -9,6 +8,8 @@ import { DateTime } from "luxon";
 function App() {
   const [searchResults, setSearchResults] = useState([]);
 
+  const [checkbox, setCheckbox] = useState(false);
+
   const [flights, setFlights] = useState([]);
 
   const [departure, setDeparture] = useState("PRG");
@@ -17,8 +18,7 @@ function App() {
 
   const [offset, setOffset] = useState(5);
 
-  let [isLoading, setIsLoading] = useState(true)
-
+  let [isLoading, setIsLoading] = useState(true);
 
   const departureCities = [
     { id: "PRG", name: "Prague" },
@@ -34,72 +34,93 @@ function App() {
     { id: "ATH", name: "Athens" },
     { id: "PRG", name: "Prague" },
   ];
-  
-  const loadFlights= async () => {
-    setIsLoading(true);
-    console.log(isLoading);
-    const response = await fetch(`https://api.skypicker.com/flights?fly_from=${departure}&fly_to=${arrival}&partner=data4youcbp202106&limit=5&offset=${offset}`);
-    const data = await response.json();
-    console.log(data);
-    setFlights(data.data);
-    setIsLoading(false);
-  };
 
-  const departureCity = (event) => {
-    setDeparture(event.target.value);
-  };
+  let stopOver = "";
+  if (checkbox) {
+    stopOver = "&max_stopovers=0";
+  }
 
-  const arrivalCity = (event) => {
-    setArrival(event.target.value);
-  };
+  const loadFlights = async () => {
+    const response = await fetch(
+      `https://api.skypicker.com/flights?fly_from=${departure}&fly_to=${arrival}&partner=data4youcbp202106&limit=${offset}&${stopOver}`
+    );
 
-  const previousResults = () => {
-    setOffset(offset - 5);
-  };
+      setIsLoading(true);
 
-  const nextResults = () => {
-    setOffset(offset + 5);
-  };
+      const data = await response.json();
 
-  useEffect(() => {
-    loadFlights();
-  }, [departure, arrival, offset]);
+      setFlights(data.data);
 
-  // let isLoading = true;
-  // if (flights) {
-  //   isLoading = false;
-  // }
+      setIsLoading(false);
+    };
 
-  return (
+    const departureCity = (event) => {
+      setDeparture(event.target.value);
+    };
 
+    const arrivalCity = (event) => {
+      setArrival(event.target.value);
+    };
 
+    const previousResults = () => {
+      setOffset(offset - 5);
+    };
+
+    const nextResults = () => {
+      setOffset(offset + 5);
+    };
+
+    useEffect(() => {
+      loadFlights();
+    }, [departure, arrival, offset, checkbox]);
+
+    // let isLoading = true;
+    // if (flights) {
+    //   isLoading = false;
+    // }
+
+    // const changeCheckbox = () => {
+    //   checkbox ? setCheckbox("false") : setCheckbox("true");
+    // };
+
+    return (
       <div className="App">
-        <h1 className='App__header'>Let the journey begin</h1>
-        <Search
-          setFlights={setFlights}
-          searchResults={searchResults}
-        />
+        <h1 className="App__header">Let the journey begin</h1>
+        <Search setFlights={setFlights} searchResults={searchResults} />
         <Select
-            label="Departure City"
-            name="flight_id"
-            onChange={ departureCity }
-            value={departure}
-            options={ departureCities }
-            emptyOption="Choose Departure City"
-        /> <br />
-              <Select
-            label="Arrival City"
-            name="flight_id"
-            onChange={ arrivalCity }
-            value={ arrival }
-            options={ arrivalCities }
-            emptyOption="Choose Arrival City"
+          label="Departure City"
+          name="flight_id"
+          onChange={departureCity}
+          value={departure}
+          options={departureCities}
+          emptyOption="Choose Departure City"
+        />{" "}
+        <br />
+        <Select
+          label="Arrival City"
+          name="flight_id"
+          onChange={arrivalCity}
+          value={arrival}
+          options={arrivalCities}
+          emptyOption="Choose Arrival City"
+        />
+        Direct flights only:
+        <input
+          id="checkbox"
+          name="checkbox"
+          type="checkbox"
+          checked={checkbox}
+          onChange={(event) => {
+            setCheckbox(event.target.checked);
+          }}
         />
         <h1>Flight Info</h1>
-
-  
-        {isLoading ? <p>Searching Flights</p> : flights.length === 0 ? <p>No connections found</p> :
-          flights.map(flight => {
+        {isLoading ? (
+          <p>Searching Flights</p>
+        ) : flights.length === 0 ? (
+          <p>No connections found</p>
+        ) : (
+          flights.map((flight) => {
             return (
 <div className='result'>
   
@@ -117,18 +138,18 @@ function App() {
               </div>
 </div>
 
-          )})
+            )
+            })
+          )}
   
-            }
+            
         <div className="pagination">
-            <button onClick={ previousResults }>Previous</button>
-            <button onClick={ nextResults }>Next</button> <br />
+          <button onClick={previousResults}>Previous</button>
+          <button onClick={nextResults}>Next</button> <br />
+          </div>
         </div>
-
-        </div>
-)
-
-
-}
+      
+    );
+  };
 
 export default App;
