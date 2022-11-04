@@ -20,6 +20,7 @@ function App() {
   return (
     <div className="App">
       <h1 className='App__header'>Let the journey begin</h1>
+
       <Search
         setSearchResults={setSearchResults}
         searchResults={searchResults}

@@ -22,7 +22,6 @@ export default function Search({ setSearchResults, searchResults }) {
   return (
     <>
       <div className="search-bar">
-        Search:
         <input
           id="search-input"
           name="search"
