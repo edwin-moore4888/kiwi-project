@@ -16,6 +16,9 @@ function App() {
 
   const [offset, setOffset] = useState(5);
 
+  let [isLoading, setIsLoading] = useState(true)
+
+
   const departureCities = [
     { id: "PRG", name: "Prague" },
     { id: "BER", name: "Berlin" },
@@ -30,12 +33,15 @@ function App() {
     { id: "ATH", name: "Athens" },
     { id: "PRG", name: "Prague" },
   ];
-
+  
   const loadFlights= async () => {
+    setIsLoading(true);
+    console.log(isLoading);
     const response = await fetch(`https://api.skypicker.com/flights?fly_from=${departure}&fly_to=${arrival}&partner=data4youcbp202106&limit=5&offset=${offset}`);
     const data = await response.json();
-
+    console.log(data);
     setFlights(data.data);
+    setIsLoading(false);
   };
 
   const departureCity = (event) => {
@@ -58,10 +64,10 @@ function App() {
     loadFlights();
   }, [departure, arrival, offset]);
 
-  let isLoading = true;
-  if (flights) {
-    isLoading = false;
-  }
+  // let isLoading = true;
+  // if (flights) {
+  //   isLoading = false;
+  // }
 
   return (
 
@@ -69,7 +75,7 @@ function App() {
       <div className="App">
         <h1 className='App__header'>Let the journey begin</h1>
         <Search
-          setSearchResults={setSearchResults}
+          setFlights={setFlights}
           searchResults={searchResults}
         />
         <Select
@@ -89,9 +95,9 @@ function App() {
             emptyOption="Choose Arrival City"
         />
         <h1>Flight Info</h1>
+
   
-  
-        {
+        {isLoading ? <p>Searching Flights</p> : flights.length === 0 ? <p>No connections found</p> :
           flights.map(flight => {
             return (
             <div key={flight.id}>
@@ -99,6 +105,9 @@ function App() {
               <span>Arrive To: {flight.cityTo}</span><br />
               <span>Departure Time: {DateTime.fromMillis(flight.dTime * 1000).toFormat('hh:mm')}</span><br />
               <span>Arrival Time: {DateTime.fromMillis(flight.aTime * 1000).toFormat('hh:mm')}</span><br />
+              <span>Duration: {flight.fly_duration}</span><br />
+              <span>Airline: {flight.airlines}</span><br />
+              <span>Seats Remaing: {flight.availability.seats}</span><br />
               <span>Price in Eur: {flight.price}</span><br /><br /> <hr />
             
             

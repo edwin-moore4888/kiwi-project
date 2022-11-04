@@ -13,7 +13,7 @@ export default function Select({
 
 
 
-            <label class="flight-form">{ label }:</label>
+            <label className="flight-form">{ label }:</label>
             <select
                 name={ name }
                 onChange={ onChange }
