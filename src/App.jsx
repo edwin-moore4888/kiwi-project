@@ -1,9 +1,10 @@
 
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import { useEffect, useState } from 'react';
 import Select from './Select';
 import Search from "./Search";
+import { DateTime } from "luxon";
 
 
 
@@ -24,7 +25,7 @@ function App() {
 
 
   const loadFlights= async () => {
-    const response = await fetch(`https://api.skypicker.com/flights?fly_from=${departure}&fly_to=${arrival}&partner=data4youcbp202106&limit=${offset}`);
+    const response = await fetch(`https://api.skypicker.com/flights?fly_from=${departure}&fly_to=${arrival}&partner=data4youcbp202106&limit=5&offset=${offset}`);
     const data = await response.json();
     console.log(data);
     setFlights(data.data);
@@ -95,8 +96,8 @@ const nextResults = () => {
             <div key={flight.id}>
               <span>Depart From: {flight.cityFrom}</span><br />
               <span>Arrive To: {flight.cityTo}</span><br />
-              <span>Departure Time: {flight.dTime}</span><br />
-              <span>Arrival Time: {flight.aTime}</span><br />
+              <span>Departure Time: {DateTime.fromMillis(flight.dTime * 1000).toFormat('hh:mm')}</span><br />
+              <span>Arrival Time: {DateTime.fromMillis(flight.aTime * 1000).toFormat('hh:mm')}</span><br />
               <span>Price in Eur: {flight.price}</span><br /><br /> <hr />
             
             
