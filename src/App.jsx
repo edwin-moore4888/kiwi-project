@@ -11,7 +11,6 @@ function App() {
       "https://api.skypicker.com/flights?fly_from=PRG&fly_to=VLC&partner=data4youcbp202106"
     );
     const data = await response.json();
-    console.log(data);
   };
   loadData();
 
